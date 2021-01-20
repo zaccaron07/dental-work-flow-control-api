@@ -34,6 +34,7 @@ export class CreatePatient1611095470477 implements MigrationInterface {
 	}
 
 	public async down(queryRunner: QueryRunner): Promise<void> {
+		await queryRunner.dropTable('patients')
 	}
 
 }
