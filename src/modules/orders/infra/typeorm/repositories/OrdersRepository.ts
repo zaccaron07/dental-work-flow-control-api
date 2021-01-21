@@ -23,6 +23,10 @@ class OrdersRepository implements IOrdersRepository {
 
     return orders
   }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id)
+  }
 }
 
 export default OrdersRepository

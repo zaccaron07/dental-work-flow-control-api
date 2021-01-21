@@ -20,6 +20,12 @@ class FakeOrdersRepository implements IOrdersRepository {
   public async findAll(): Promise<Order[] | undefined> {
     return this.orders
   }
+
+  public async delete(id: string): Promise<void> {
+    const findIndex = this.orders.findIndex(order => order.id == id)
+
+    this.orders.splice(findIndex, 1)
+  }
 }
 
 export default FakeOrdersRepository

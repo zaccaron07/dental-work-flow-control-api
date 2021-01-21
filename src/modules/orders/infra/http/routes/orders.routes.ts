@@ -9,4 +9,7 @@ ordersRouter.route('/')
   .post(ordersController.create)
   .get(ordersController.index)
 
+ordersRouter.route('/:id')
+  .delete(ordersController.delete)
+
 export default ordersRouter

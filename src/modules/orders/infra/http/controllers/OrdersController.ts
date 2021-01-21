@@ -1,5 +1,6 @@
 import OrdersRepository from '@modules/orders/infra/typeorm/repositories/OrdersRepository'
 import CreateOrderService from '@modules/orders/services/CreateOrderService'
+import DeleteOrderService from '@modules/orders/services/DeleteOrderService'
 import ListOrdersService from '@modules/orders/services/ListOrdersService'
 import { Request, Response } from 'express'
 
@@ -22,6 +23,17 @@ class OrdersController {
     const orders = await listOrdersService.execute()
 
     return response.json(orders)
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params
+
+    const ordersRepository = new OrdersRepository()
+    const deleteOrderService = new DeleteOrderService(ordersRepository)
+
+    deleteOrderService.execute(id)
+
+    return response.status(204).json()
   }
 }
 
