@@ -21,10 +21,24 @@ class FakeOrdersRepository implements IOrdersRepository {
     return this.orders
   }
 
+  public async findById(id: string): Promise<Order | undefined> {
+    const order = this.orders.find(order => order.id === id)
+
+    return order
+  }
+
   public async delete(id: string): Promise<void> {
-    const findIndex = this.orders.findIndex(order => order.id == id)
+    const findIndex = this.orders.findIndex(order => order.id === id)
 
     this.orders.splice(findIndex, 1)
+  }
+
+  public async save(order: Order): Promise<Order> {
+    const findIndex = this.orders.findIndex(findOrder => findOrder.id === order.id)
+
+    this.orders[findIndex] = order
+
+    return order
   }
 }
 

@@ -20,12 +20,24 @@ class OrdersRepository implements IOrdersRepository {
 
   public async findAll(): Promise<Order[] | undefined> {
     const orders = await this.ormRepository.find()
-
+    
     return orders
+  }
+
+  public async findById(id: string): Promise<Order | undefined> {
+    const order = await this.ormRepository.findOne(id)
+
+    return order
   }
 
   public async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id)
+  }
+
+  public async save(order: Order): Promise<Order> {
+    await this.ormRepository.save(order)
+
+    return order
   }
 }
 
