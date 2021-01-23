@@ -1,4 +1,5 @@
 import CreateOrderService from '@modules/orders/services/CreateOrderService'
+import AppError from '@shared/errors/AppError'
 import FakeOrdersRepository from '../repositories/fakes/FakeOrdersRepository'
 import UpdateOrderDoneService from './UpdateOrderDoneService'
 
@@ -51,6 +52,6 @@ describe('UpdateOrderDone', () => {
 
     expect(
       updateOrderDoneService.execute('non-existing-id')
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })
