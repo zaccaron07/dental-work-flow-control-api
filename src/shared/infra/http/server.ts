@@ -6,6 +6,7 @@ import { errors } from 'celebrate'
 import routes from './routes/routes'
 
 import '@shared/infra/typeorm'
+import '@shared/container'
 import AppError from '@shared/errors/AppError'
 
 const app = express()

@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe'
 import Doctor from '../infra/typeorm/entities/Doctor'
 import IDoctorsRepository from '../repositories/IDoctorsRepository'
 
@@ -7,8 +8,10 @@ interface IRequest {
   phone_number: string
 }
 
+@injectable()
 class CreateDoctorService {
   constructor(
+    @inject('DoctorsRepository')
     private doctorsRepository: IDoctorsRepository
   ) { }
 
