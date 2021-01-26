@@ -1,14 +1,13 @@
-import PatientsRepository from '@modules/patients/infra/typeorm/repositories/PatientsRepository'
 import CreatePatientService from '@modules/patients/services/CreatePatientService'
 import ListPatientsService from '@modules/patients/services/ListPatientsService'
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 
 class PatientsController {
   public async create (request: Request, response: Response): Promise<Response> {
     const { name } = request.body
 
-    const patientsRepository = new PatientsRepository()
-    const createPatientService = new CreatePatientService(patientsRepository)
+    const createPatientService = container.resolve(CreatePatientService)
 
     const patient = await createPatientService.execute({ name })
 
@@ -16,8 +15,7 @@ class PatientsController {
   }
 
   public async index (_: Request, response: Response): Promise<Response> {
-    const patientsRepository = new PatientsRepository()
-    const listPatientsService = new ListPatientsService(patientsRepository)
+    const listPatientsService = container.resolve(ListPatientsService)
 
     const patients = await listPatientsService.execute()
 

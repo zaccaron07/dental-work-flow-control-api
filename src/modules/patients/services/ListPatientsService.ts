@@ -1,8 +1,11 @@
+import { inject, injectable } from 'tsyringe';
 import Patient from '../infra/typeorm/entities/Patient';
 import IPatientsRepository from '../repositories/IPatientsRepository';
 
+@injectable()
 class ListPatientsService {
   constructor(
+    @inject('PatientsRepository')
     private patientsRepository: IPatientsRepository
   ) { }
 
