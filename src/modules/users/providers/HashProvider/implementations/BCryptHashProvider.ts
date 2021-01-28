@@ -1,6 +1,6 @@
 import IHashProvider from '../models/IHashProvider'
 
-import { hash } from 'bcrypt'
+import { compare, hash } from 'bcrypt'
 
 export default class BCryptHashProvider implements IHashProvider {
   public async generateHash(payload: string): Promise<string> {
@@ -8,6 +8,6 @@ export default class BCryptHashProvider implements IHashProvider {
   }
 
   public async compareHash(payload: string, hashed: string): Promise<boolean> {
-    return this.compareHash(payload, hashed)
+    return compare(payload, hashed)
   }
 }
