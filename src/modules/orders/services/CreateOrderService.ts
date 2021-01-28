@@ -1,5 +1,6 @@
 import Order from '../infra/typeorm/entities/Order'
 import IOrdersRepository from '../repositories/IOrdersRepository'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   name: string
@@ -11,8 +12,10 @@ interface IRequest {
   patient_id: string
 }
 
+@injectable()
 class CreateOrderService {
   constructor(
+    @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository
   ) { }
 
