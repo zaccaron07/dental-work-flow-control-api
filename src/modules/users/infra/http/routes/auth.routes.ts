@@ -3,10 +3,10 @@ import { celebrate, Segments, Joi } from 'celebrate'
 
 import AuthController from '@modules/users/infra/http/controllers/AuthController'
 
-const sessionsRouter = Router()
+const authRouter = Router()
 const authController = new AuthController()
 
-sessionsRouter.post(
+authRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -17,4 +17,4 @@ sessionsRouter.post(
   authController.create
 )
 
-export default sessionsRouter
+export default authRouter
