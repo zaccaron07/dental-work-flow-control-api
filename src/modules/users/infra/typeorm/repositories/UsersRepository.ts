@@ -1,9 +1,9 @@
 import User from '../entities/User'
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO'
-import IUserRepository from '@modules/users/repositories/IUserRepository'
+import IUsersRepository from '@modules/users/repositories/IUsersRepository'
 import { getRepository, Repository } from 'typeorm'
 
-class UserRepository implements IUserRepository {
+class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>
 
   constructor() {
@@ -23,6 +23,12 @@ class UserRepository implements IUserRepository {
 
     return user
   }
+
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const user = this.ormRepository.findOne({ where: { email } })
+
+    return user
+  }
 }
 
-export default UserRepository
+export default UsersRepository

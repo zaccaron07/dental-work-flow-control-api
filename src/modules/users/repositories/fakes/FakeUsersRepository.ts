@@ -1,10 +1,10 @@
 import User from '@modules/users/infra/typeorm/entities/User'
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO'
-import IUserRepository from '../IUserRepository'
+import IUsersRepository from '../IUsersRepository'
 
 import { v4 as uuid } from 'uuid'
 
-class FakeUsersRepository implements IUserRepository {
+class FakeUsersRepository implements IUsersRepository {
   private users: User[] = []
 
   public async create(data: ICreateUserDTO): Promise<User> {
@@ -19,6 +19,12 @@ class FakeUsersRepository implements IUserRepository {
 
   public async findById(id: string): Promise<User | undefined> {
     const user = this.users.find(user => user.id === id)
+
+    return user
+  }
+
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const user = this.users.find(user => user.email === email)
 
     return user
   }
