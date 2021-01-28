@@ -1,4 +1,4 @@
-import OrdersRepository from '@modules/orders/infra/typeorm/repositories/OrdersRepository'
+import { container } from 'tsyringe'
 import CreateOrderService from '@modules/orders/services/CreateOrderService'
 import DeleteOrderService from '@modules/orders/services/DeleteOrderService'
 import ListOrdersService from '@modules/orders/services/ListOrdersService'
@@ -8,8 +8,7 @@ class OrdersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, entry_date, due_date, price, done, doctor_id, patient_id } = request.body
 
-    const ordersRepository = new OrdersRepository()
-    const createOrderService = new CreateOrderService(ordersRepository)
+    const createOrderService = container.resolve(CreateOrderService)
 
     const patient = await createOrderService.execute({ name, entry_date, due_date, price, done, doctor_id, patient_id })
 
@@ -17,8 +16,7 @@ class OrdersController {
   }
 
   public async index(_: Request, response: Response): Promise<Response> {
-    const ordersRepository = new OrdersRepository()
-    const listOrdersService = new ListOrdersService(ordersRepository)
+    const listOrdersService = container.resolve(ListOrdersService)
 
     const orders = await listOrdersService.execute()
 
@@ -28,8 +26,7 @@ class OrdersController {
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.params
 
-    const ordersRepository = new OrdersRepository()
-    const deleteOrderService = new DeleteOrderService(ordersRepository)
+    const deleteOrderService = container.resolve(DeleteOrderService)
 
     deleteOrderService.execute(id)
 

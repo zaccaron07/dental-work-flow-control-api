@@ -11,6 +11,9 @@ import DoctorsRepository from '@modules/doctors/infra/typeorm/repositories/Docto
 import IUsersRepository from '@modules/users/repositories/IUsersRepository'
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository'
 
+import IOrdersRepository from '@modules/orders/repositories/IOrdersRepository'
+import OrdersRepository from '@modules/orders/infra/typeorm/repositories/OrdersRepository'
+
 container.registerSingleton<IDoctorsRepository>(
   'DoctorsRepository',
   DoctorsRepository,
@@ -24,4 +27,9 @@ container.registerSingleton<IPatientsRepository>(
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
+)
+
+container.registerSingleton<IOrdersRepository>(
+  'OrdersRepository',
+  OrdersRepository,
 )
