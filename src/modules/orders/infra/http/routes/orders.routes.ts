@@ -2,11 +2,14 @@ import { celebrate, Joi, Segments } from 'celebrate'
 import Router from 'express'
 import OrderDoneController from '../controllers/OrderDoneController'
 import OrdersController from '../controllers/OrdersController'
+import ensureAuthenticate from '@modules/users/infra/http/middlewares/ensureAuthenticate'
 
 const ordersRouter = Router()
 
 const ordersController = new OrdersController()
 const orderDoneController = new OrderDoneController()
+
+ordersRouter.use(ensureAuthenticate)
 
 ordersRouter.route('/')
   .post(
