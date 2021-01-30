@@ -22,7 +22,6 @@ class OrdersController {
     const listOrdersService = container.resolve(ListOrdersService)
 
     const orders = await listOrdersService.execute(user_id)
-    console.log(orders);
     
     return response.json(orders)
   }
