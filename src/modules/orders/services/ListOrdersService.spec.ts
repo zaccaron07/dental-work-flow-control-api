@@ -1,14 +1,14 @@
-import CreateDoctorService from '@modules/orders/services/CreateOrderService'
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import FakeOrdersRepository from '../repositories/fakes/FakeOrdersRepository'
 import ListOrdersService from './ListOrdersService'
 
 describe('ListOrders', () => {
   it('should be able to list all orders', async () => {
     const fakeOrdersRepository = new FakeOrdersRepository()
-    const listOrdersService = new ListOrdersService(fakeOrdersRepository)
-    const createOrdersService = new CreateDoctorService(fakeOrdersRepository)
+    const fakeCacheRepository = new FakeCacheProvider()
+    const listOrdersService = new ListOrdersService(fakeOrdersRepository, fakeCacheRepository)
 
-    const order1 = await createOrdersService.execute({
+    const order1 = await fakeOrdersRepository.create({
       name: 'Order #1',
       entry_date: new Date(),
       due_date: new Date(),
@@ -18,7 +18,7 @@ describe('ListOrders', () => {
       patient_id: 'patient_id'
     })
 
-    const order2 = await createOrdersService.execute({
+    const order2 = await fakeOrdersRepository.create({
       name: 'Order #2',
       entry_date: new Date(),
       due_date: new Date(),
@@ -28,7 +28,7 @@ describe('ListOrders', () => {
       patient_id: 'patient_id'
     })
 
-    const orders = await listOrdersService.execute()
+    const orders = await listOrdersService.execute('user_id')
 
     expect(orders).toEqual([order1, order2])
   })

@@ -1,5 +1,6 @@
 import { container } from 'tsyringe'
 
+import './providers/CacheProvider'
 import '@modules/users/providers'
 
 import IPatientsRepository from '@modules/patients/repositories/IPatientsRepository'

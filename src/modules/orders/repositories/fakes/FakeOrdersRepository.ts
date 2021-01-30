@@ -17,7 +17,7 @@ class FakeOrdersRepository implements IOrdersRepository {
     return order
   }
 
-  public async findAll(): Promise<Order[] | undefined> {
+  public async findAll(): Promise<Order[]> {
     return this.orders
   }
 

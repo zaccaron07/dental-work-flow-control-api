@@ -1,15 +1,21 @@
-import CreateOrderService from '@modules/orders/services/CreateOrderService'
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import AppError from '@shared/errors/AppError'
 import FakeOrdersRepository from '../repositories/fakes/FakeOrdersRepository'
 import UpdateOrderDoneService from './UpdateOrderDoneService'
 
-describe('UpdateOrderDone', () => {
-  it('should be able to update an order to done', async () => {
-    const fakeOrdersRepository = new FakeOrdersRepository()
-    const createOrderService = new CreateOrderService(fakeOrdersRepository)
-    const updateOrderDoneService = new UpdateOrderDoneService(fakeOrdersRepository)
+let fakeOrdersRepository: FakeOrdersRepository
+let fakeCacheProvider: FakeCacheProvider
+let updateOrderDoneService: UpdateOrderDoneService
 
-    const order = await createOrderService.execute({
+describe('UpdateOrderDone', () => {
+  beforeEach(() => {
+    fakeOrdersRepository = new FakeOrdersRepository()
+    fakeCacheProvider = new FakeCacheProvider()
+    updateOrderDoneService = new UpdateOrderDoneService(fakeOrdersRepository, fakeCacheProvider)
+  })
+
+  it('should be able to update an order to done', async () => {
+    const order = await fakeOrdersRepository.create({
       name: 'Order #1',
       entry_date: new Date(),
       due_date: new Date(),
@@ -19,19 +25,15 @@ describe('UpdateOrderDone', () => {
       patient_id: 'patient_id'
     })
 
-    const orderDone = await updateOrderDoneService.execute(order.id)
+    const orderDone = await updateOrderDoneService.execute({ id: order.id, user_id: 'user_id' })
 
     expect(orderDone.done).toBe(true)
   })
 
   it('should not be able to update an order to done when it is already done', async () => {
-    const fakeOrdersRepository = new FakeOrdersRepository()
-    const createOrderService = new CreateOrderService(fakeOrdersRepository)
-    const updateOrderDoneService = new UpdateOrderDoneService(fakeOrdersRepository)
-
     const orderDoneSave = jest.spyOn(fakeOrdersRepository, 'save')
 
-    const order = await createOrderService.execute({
+    const order = await fakeOrdersRepository.create({
       name: 'Order #1',
       entry_date: new Date(),
       due_date: new Date(),
@@ -41,17 +43,14 @@ describe('UpdateOrderDone', () => {
       patient_id: 'patient_id'
     })
 
-    await updateOrderDoneService.execute(order.id)
+    await updateOrderDoneService.execute({ id: order.id, user_id: 'user_id' })
 
     expect(orderDoneSave).not.toHaveBeenCalled()
   })
 
   it('should not be able to update a non existing order to done', async () => {
-    const fakeOrdersRepository = new FakeOrdersRepository()
-    const updateOrderDoneService = new UpdateOrderDoneService(fakeOrdersRepository)
-
     expect(
-      updateOrderDoneService.execute('non-existing-id')
+      updateOrderDoneService.execute({ id: 'non-existing-id', user_id: 'user_id' })
     ).rejects.toBeInstanceOf(AppError)
   })
 })
