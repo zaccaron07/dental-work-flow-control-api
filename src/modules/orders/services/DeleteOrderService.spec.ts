@@ -1,18 +1,16 @@
-import CreateDoctorService from '@modules/orders/services/CreateOrderService'
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import FakeOrdersRepository from '../repositories/fakes/FakeOrdersRepository'
 import DeleteOrderService from './DeleteOrderService'
-import ListOrdersService from './ListOrdersService'
 
 describe('DeleteOrder', () => {
   it('should be able to delete an order', async () => {
     const fakeOrdersRepository = new FakeOrdersRepository()
-    const createOrdersService = new CreateDoctorService(fakeOrdersRepository)
-    const deleteOrderService = new DeleteOrderService(fakeOrdersRepository)
-    const listOrdersService = new ListOrdersService(fakeOrdersRepository)
+    const fakeCacheProvider = new FakeCacheProvider()
+    const deleteOrderService = new DeleteOrderService(fakeOrdersRepository, fakeCacheProvider)
 
     const deleteOrder = jest.spyOn(fakeOrdersRepository, 'delete')
 
-    const order = await createOrdersService.execute({
+    const order = await fakeOrdersRepository.create({
       name: 'Order #1',
       entry_date: new Date(),
       due_date: new Date(),
@@ -22,9 +20,9 @@ describe('DeleteOrder', () => {
       patient_id: 'patient_id'
     })
 
-    await deleteOrderService.execute(order.id)
+    await deleteOrderService.execute({ id: order.id, user_id: 'user_id' })
 
-    const orders = await listOrdersService.execute()
+    const orders = await fakeOrdersRepository.findAll()
 
     expect(deleteOrder).toHaveBeenCalledWith(order.id)
     expect(orders).toEqual([])
