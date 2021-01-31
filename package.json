@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@types/ioredis": "^4.19.3",
+    "@types/mime": "^2.0.3",
+    "@types/multer": "^1.4.5",
+    "aws-sdk": "^2.834.0",
     "bcrypt": "^5.0.0",
     "celebrate": "^13.0.4",
     "class-transformer": "^0.3.2",
@@ -22,6 +25,8 @@
     "express-async-errors": "^3.1.1",
     "ioredis": "^4.19.4",
     "jsonwebtoken": "^8.5.1",
+    "mime": "^2.5.0",
+    "multer": "^1.4.2",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.4.0",
