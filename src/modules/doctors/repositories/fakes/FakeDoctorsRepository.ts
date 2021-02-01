@@ -16,8 +16,8 @@ class FakeDoctorsRepository implements IDoctorsRepository {
     return doctor
   }
 
-  public async findAll(): Promise<Doctor[] | undefined> {
-    return this.doctors
+  public async findAll(user_id: string): Promise<Doctor[] | undefined> {
+    return this.doctors.filter(doctor => doctor.user_id === user_id)
   }
 
 }

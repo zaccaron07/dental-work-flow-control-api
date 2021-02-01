@@ -45,6 +45,10 @@ export class CreateOrder1611179235135 implements MigrationInterface {
             isNullable: true
           },
           {
+            name: 'user_id',
+            type: 'uuid'
+          },
+          {
             name: 'created_at',
             type: 'timestamp with time zone',
             default: 'now()'
@@ -70,6 +74,14 @@ export class CreateOrder1611179235135 implements MigrationInterface {
             referencedColumnNames: ['id'],
             columnNames: ['patient_id'],
             onDelete: 'SET NULL',
+            onUpdate: 'CASCADE'
+          },
+          {
+            name: 'UserOrder',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
           }
         ]

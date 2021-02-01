@@ -17,12 +17,13 @@ describe('DeleteOrder', () => {
       done: false,
       price: 55,
       doctor_id: 'doctor_id',
-      patient_id: 'patient_id'
+      patient_id: 'patient_id',
+      user_id: 'user_id'
     })
 
     await deleteOrderService.execute({ id: order.id, user_id: 'user_id' })
 
-    const orders = await fakeOrdersRepository.findAll()
+    const orders = await fakeOrdersRepository.findAll('user_id')
 
     expect(deleteOrder).toHaveBeenCalledWith(order.id)
     expect(orders).toEqual([])

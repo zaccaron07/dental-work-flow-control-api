@@ -19,6 +19,10 @@ export class CreatePatient1611095470477 implements MigrationInterface {
 						type: 'varchar'
 					},
 					{
+						name: 'user_id',
+						type: 'uuid'
+					},
+					{
 						name: 'created_at',
 						type: 'timestamp',
 						default: 'now()'
@@ -27,6 +31,16 @@ export class CreatePatient1611095470477 implements MigrationInterface {
 						name: 'updated_at',
 						type: 'timestamp',
 						default: 'now()'
+					}
+				],
+				foreignKeys: [
+					{
+						name: 'UserPatient',
+						columnNames: ['user_id'],
+						referencedTableName: 'users',
+						referencedColumnNames: ['id'],
+						onUpdate: 'CASCADE',
+						onDelete: 'CASCADE'
 					}
 				]
 			})

@@ -7,7 +7,8 @@ describe('CreatePatient', () => {
     const createPatientsService = new CreatePatientService(fakePatientsRepository)
 
     const patient = await createPatientsService.execute({
-      name: 'John Doe'
+      name: 'John Doe',
+      user_id: 'user-id'
     })
 
     expect(patient.name).toBe('John Doe')

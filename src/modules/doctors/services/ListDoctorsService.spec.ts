@@ -11,16 +11,18 @@ describe('ListDoctors', () => {
     const doctor1 = await createDoctorService.execute({
       name: 'John Doe2',
       address: 'Street John2',
-      phone_number: '+5548998997844'
+      phone_number: '+5548998997844',
+      user_id: 'user-id'
     })
 
     const doctor2 = await createDoctorService.execute({
       name: 'John Doe2',
       address: 'Street John2',
-      phone_number: '+5548998997844'
+      phone_number: '+5548998997844',
+      user_id: 'user-id'
     })
 
-    const doctors = await listDoctorsService.execute()
+    const doctors = await listDoctorsService.execute('user-id')
 
     expect(doctors).toEqual([doctor1, doctor2])
   })

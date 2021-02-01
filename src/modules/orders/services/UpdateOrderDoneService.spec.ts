@@ -22,7 +22,8 @@ describe('UpdateOrderDone', () => {
       done: false,
       price: 55,
       doctor_id: 'doctor_id',
-      patient_id: 'patient_id'
+      patient_id: 'patient_id',
+      user_id: 'user_id'
     })
 
     const orderDone = await updateOrderDoneService.execute({ id: order.id, user_id: 'user_id' })
@@ -40,7 +41,8 @@ describe('UpdateOrderDone', () => {
       done: true,
       price: 55,
       doctor_id: 'doctor_id',
-      patient_id: 'patient_id'
+      patient_id: 'patient_id',
+      user_id: 'user_id'
     })
 
     await updateOrderDoneService.execute({ id: order.id, user_id: 'user_id' })

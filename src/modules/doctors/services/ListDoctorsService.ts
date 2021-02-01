@@ -9,8 +9,8 @@ class CreateDoctorService {
     private doctorsRepository: IDoctorsRepository
   ) { }
 
-  async execute(): Promise<Doctor[] | undefined> {
-    const doctors = await this.doctorsRepository.findAll()
+  async execute(user_id: string): Promise<Doctor[] | undefined> {
+    const doctors = await this.doctorsRepository.findAll(user_id)
 
     return doctors
   }

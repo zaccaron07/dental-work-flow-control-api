@@ -6,4 +6,5 @@ export default interface ICreateOrderDTO {
   done: boolean
   doctor_id: string
   patient_id: string
+  user_id: string
 }
