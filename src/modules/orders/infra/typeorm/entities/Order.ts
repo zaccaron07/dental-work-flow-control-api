@@ -1,5 +1,6 @@
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor'
 import Patient from '@modules/patients/infra/typeorm/entities/Patient'
+import User from '@modules/users/infra/typeorm/entities/User'
 import {
   Column,
   CreateDateColumn,
@@ -43,6 +44,13 @@ class Order {
 
   @Column()
   patient_id: string
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User
+
+  @Column()
+  user_id: string
 
   @CreateDateColumn()
   created_at: Date;

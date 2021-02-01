@@ -19,7 +19,7 @@ class ListOrdersService {
     let orders = await this.cacheProvider.recover<Order[]>(cacheKey)
     
     if (!orders) {
-      orders = await this.ordersRepository.findAll()
+      orders = await this.ordersRepository.findAll(user_id)
       
       await this.cacheProvider.save(`orders:${user_id}`, orders)
     }

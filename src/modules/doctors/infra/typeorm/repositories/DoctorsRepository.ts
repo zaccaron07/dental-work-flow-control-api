@@ -18,8 +18,8 @@ class DoctorsRepository implements IDoctorsRepository {
     return doctor
   }
 
-  public async findAll(): Promise<Doctor[] | undefined> {
-    const doctors = await this.ormRepository.find()
+  public async findAll(user_id: string): Promise<Doctor[] | undefined> {
+    const doctors = await this.ormRepository.find({ where: { user_id } })
 
     return doctors
   }

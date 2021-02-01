@@ -9,8 +9,8 @@ class ListPatientsService {
     private patientsRepository: IPatientsRepository
   ) { }
 
-  async execute(): Promise<Patient[] | undefined> {
-    const patients = await this.patientsRepository.findAll()
+  async execute(user_id: string): Promise<Patient[] | undefined> {
+    const patients = await this.patientsRepository.findAll(user_id)
 
     return patients
   }

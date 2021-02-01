@@ -9,12 +9,14 @@ describe('CreateDoctor', () => {
     const doctor = await createDoctorService.execute({
       name: 'John Doe',
       address: 'Street John',
-      phone_number: '+5548998997844'
+      phone_number: '+5548998997844',
+      user_id: 'user_id'
     })
 
     expect(doctor.name).toBe('John Doe')
     expect(doctor.address).toBe('Street John')
     expect(doctor.phone_number).toBe('+5548998997844')
+    expect(doctor.user_id).toBe('user_id')
     expect(doctor).toHaveProperty('id')
   })
 })

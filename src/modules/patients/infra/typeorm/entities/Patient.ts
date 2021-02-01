@@ -1,7 +1,10 @@
+import User from '@modules/users/infra/typeorm/entities/User'
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
@@ -13,6 +16,13 @@ class Patient {
 
   @Column()
   name: string
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User
+
+  @Column()
+  user_id: string
 
   @CreateDateColumn()
   created_at: Date;

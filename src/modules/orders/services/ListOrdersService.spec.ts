@@ -15,7 +15,8 @@ describe('ListOrders', () => {
       done: false,
       price: 55,
       doctor_id: 'doctor_id',
-      patient_id: 'patient_id'
+      patient_id: 'patient_id',
+      user_id: 'user_id'
     })
 
     const order2 = await fakeOrdersRepository.create({
@@ -25,7 +26,8 @@ describe('ListOrders', () => {
       done: false,
       price: 59,
       doctor_id: 'doctor_id',
-      patient_id: 'patient_id'
+      patient_id: 'patient_id',
+      user_id: 'user_id'
     })
 
     const orders = await listOrdersService.execute('user_id')

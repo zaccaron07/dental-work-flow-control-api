@@ -6,6 +6,7 @@ interface IRequest {
   name: string
   address: string
   phone_number: string
+  user_id: string
 }
 
 @injectable()
@@ -15,8 +16,8 @@ class CreateDoctorService {
     private doctorsRepository: IDoctorsRepository
   ) { }
 
-  async execute({ name, address, phone_number }: IRequest): Promise<Doctor> {
-    const doctor = await this.doctorsRepository.create({ name, address, phone_number })
+  async execute({ name, address, phone_number, user_id }: IRequest): Promise<Doctor> {
+    const doctor = await this.doctorsRepository.create({ name, address, phone_number, user_id })
 
     return doctor
   }

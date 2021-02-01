@@ -4,6 +4,7 @@ import IPatientsRepository from '../repositories/IPatientsRepository'
 
 interface IRequest {
   name: string
+  user_id: string
 }
 
 @injectable()
@@ -13,8 +14,8 @@ class CreatePatientService {
     private patientsRepository: IPatientsRepository
   ) { }
 
-  async execute ({ name }: IRequest): Promise<Patient> {
-    const patient = await this.patientsRepository.create({ name })
+  async execute ({ name, user_id }: IRequest): Promise<Patient> {
+    const patient = await this.patientsRepository.create({ name, user_id })
 
     return patient
   }

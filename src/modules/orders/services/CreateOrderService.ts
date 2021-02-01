@@ -25,7 +25,7 @@ class CreateOrderService {
   ) { }
 
   async execute({ name, entry_date, due_date, price, done, doctor_id, patient_id, user_id }: IRequest): Promise<Order> {
-    const order = await this.ordersRepository.create({ name, entry_date, due_date, price, done, doctor_id, patient_id })
+    const order = await this.ordersRepository.create({ name, entry_date, due_date, price, done, doctor_id, patient_id, user_id })
 
     await this.cacheProvider.invalidate(`orders:${user_id}`)
 

@@ -17,8 +17,8 @@ class FakePatientsRepository implements IPatientsRepository {
     return patient
   }
 
-  public async findAll (): Promise<Patient[] | undefined> {
-    return this.patients
+  public async findAll (user_id: string): Promise<Patient[] | undefined> {
+    return this.patients.filter(patient => patient.user_id === user_id)
   }
 }
 

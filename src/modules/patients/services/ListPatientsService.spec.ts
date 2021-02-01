@@ -9,14 +9,16 @@ describe('ListPatients', () => {
     let listPatientsService = new ListPatientsService(fakePatientsRepository)
 
     const patient1 = await createPatientService.execute({
-      name: 'John Doe'
+      name: 'John Doe',
+      user_id: 'user_id'
     })
 
     const patient2 = await createPatientService.execute({
-      name: 'John Tre'
+      name: 'John Tre',
+      user_id: 'user_id'
     })
 
-    const patients = await listPatientsService.execute()
+    const patients = await listPatientsService.execute('user_id')
 
     expect(patients).toEqual([patient1, patient2])
   })
