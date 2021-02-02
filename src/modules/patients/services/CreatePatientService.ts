@@ -4,6 +4,10 @@ import IPatientsRepository from '../repositories/IPatientsRepository'
 
 interface IRequest {
   name: string
+  age: number
+  address: string
+  phone_number: string
+  email: string
   user_id: string
 }
 
@@ -14,8 +18,8 @@ class CreatePatientService {
     private patientsRepository: IPatientsRepository
   ) { }
 
-  async execute ({ name, user_id }: IRequest): Promise<Patient> {
-    const patient = await this.patientsRepository.create({ name, user_id })
+  async execute ({ name, age, address, phone_number, email, user_id }: IRequest): Promise<Patient> {
+    const patient = await this.patientsRepository.create({ name, age, address, phone_number, email, user_id })
 
     return patient
   }

@@ -6,11 +6,11 @@ import { container } from 'tsyringe'
 class PatientsController {
   public async create (request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id
-    const { name } = request.body
+    const { name, age, address, phone_number, email } = request.body
 
     const createPatientService = container.resolve(CreatePatientService)
 
-    const patient = await createPatientService.execute({ name, user_id })
+    const patient = await createPatientService.execute({ name, age, address, phone_number, email, user_id })
 
     return response.json(patient)
   }

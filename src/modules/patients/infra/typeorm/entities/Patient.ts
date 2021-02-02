@@ -24,6 +24,18 @@ class Patient {
   @Column()
   user_id: string
 
+  @Column()
+  age: number
+
+  @Column()
+  address: string
+
+  @Column()
+  phone_number: string
+
+  @Column()
+  email: string
+
   @CreateDateColumn()
   created_at: Date;
 
