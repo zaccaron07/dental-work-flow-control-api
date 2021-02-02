@@ -10,11 +10,19 @@ describe('ListPatients', () => {
 
     const patient1 = await createPatientService.execute({
       name: 'John Doe',
+      age: 10,
+      address: 'Street John Doe',
+      email: 'john@gmail.com',
+      phone_number: '7744',
       user_id: 'user_id'
     })
 
     const patient2 = await createPatientService.execute({
       name: 'John Tre',
+      age: 10,
+      address: 'Street John Doe',
+      email: 'john@gmail.com',
+      phone_number: '7744',
       user_id: 'user_id'
     })
 
