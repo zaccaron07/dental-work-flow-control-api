@@ -23,6 +23,22 @@ export class CreatePatient1611095470477 implements MigrationInterface {
 						type: 'uuid'
 					},
 					{
+						name: 'age',
+						type: 'integer'
+					},
+					{
+						name: 'address',
+						type: 'varchar'
+					},
+					{
+						name: 'phone_number',
+						type: 'varchar'
+					},
+					{
+						name: 'email',
+						type: 'varchar'
+					},
+					{
 						name: 'created_at',
 						type: 'timestamp',
 						default: 'now()'

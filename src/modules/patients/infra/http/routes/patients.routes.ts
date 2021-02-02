@@ -13,7 +13,11 @@ patientsRouter.route('/')
   .post(
     celebrate({
       [Segments.BODY]: {
-        name: Joi.string().required()
+        name: Joi.string().required(),
+        age: Joi.number().max(150).required(),
+        address: Joi.string().required(),
+        phone_number: Joi.string().required(),
+        email: Joi.string().email().required()
       }
     }),
     patientsController.create
