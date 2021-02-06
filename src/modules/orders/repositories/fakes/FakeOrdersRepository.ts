@@ -1,8 +1,9 @@
+import { v4 as uuid } from 'uuid'
+import { getDay, getMonth, getYear } from 'date-fns'
+
 import ICreateOrderDTO from '@modules/orders/dtos/ICreateOrderDTO'
 import Order from '@modules/orders/infra/typeorm/entities/Order'
 import IOrdersRepository from '../IOrdersRepository'
-
-import { v4 as uuid } from 'uuid'
 
 class FakeOrdersRepository implements IOrdersRepository {
   private orders: Order[] = []
@@ -25,6 +26,20 @@ class FakeOrdersRepository implements IOrdersRepository {
     const order = this.orders.find(order => order.id === id)
 
     return order
+  }
+
+  public async findOrdersThatExpireToday(): Promise<Order[]> {
+    const currentDate = new Date()
+
+    const orders = this.orders.filter(order => {
+      return (
+        getDay(order.due_date) === getDay(currentDate) &&
+        getMonth(order.due_date) === getMonth(currentDate) &&
+        getYear(order.due_date) === getYear(currentDate)
+      )
+    })
+
+    return orders
   }
 
   public async delete(id: string): Promise<void> {

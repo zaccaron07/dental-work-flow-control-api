@@ -1,6 +1,8 @@
+import { endOfDay, startOfDay } from 'date-fns'
+import { Between, getRepository, Repository } from 'typeorm'
+
 import ICreateOrderDTO from '@modules/orders/dtos/ICreateOrderDTO'
 import IOrdersRepository from '@modules/orders/repositories/IOrdersRepository'
-import { getRepository, Repository } from 'typeorm'
 import Order from '../entities/Order'
 
 class OrdersRepository implements IOrdersRepository {
@@ -28,6 +30,18 @@ class OrdersRepository implements IOrdersRepository {
     const order = await this.ormRepository.findOne(id)
 
     return order
+  }
+
+  public async findOrdersThatExpireToday(): Promise<Order[]> {
+    const currentDate = new Date()
+
+    const orders = await this.ormRepository.find({
+      where: {
+        due_date: Between(startOfDay(currentDate), endOfDay(currentDate))
+      }
+    })
+
+    return orders
   }
 
   public async delete(id: string): Promise<void> {
