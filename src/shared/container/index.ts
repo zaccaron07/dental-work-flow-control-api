@@ -2,7 +2,9 @@ import { container } from 'tsyringe'
 
 import './providers/CacheProvider'
 import './providers/StorageProvider'
+import './providers/SchedulerProvider'
 import '@modules/users/providers'
+import './schedulers'
 
 import IPatientsRepository from '@modules/patients/repositories/IPatientsRepository'
 import PatientsRepository from '@modules/patients/infra/typeorm/repositories/PatientsRepository'
@@ -15,6 +17,9 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 
 import IOrdersRepository from '@modules/orders/repositories/IOrdersRepository'
 import OrdersRepository from '@modules/orders/infra/typeorm/repositories/OrdersRepository'
+
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository'
+import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository'
 
 container.registerSingleton<IDoctorsRepository>(
   'DoctorsRepository',
@@ -34,4 +39,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IOrdersRepository>(
   'OrdersRepository',
   OrdersRepository,
+)
+
+container.registerSingleton<INotificationsRepository>(
+  'NotificationsRepository',
+  NotificationsRepository,
 )
