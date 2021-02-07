@@ -4,8 +4,11 @@ export default [
   {
     name: 'default',
     type: 'postgres',
-    url: process.env.DATABASE_URL,
+    port: '5432',
     migrationsRun: true,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_NAME,
     entities: [
       './src/modules/**/infra/typeorm/entities/*.ts'
     ],
