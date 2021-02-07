@@ -14,7 +14,7 @@ services:
       - mongo
       - redis
       environment:
-        DATABASE_URL: postgres://postgres:docker@postgres:5432/${POSTGRES_NAME}
+        DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_NAME}
   postgres:
       container_name: postgres
       image: postgres
