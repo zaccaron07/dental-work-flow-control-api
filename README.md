@@ -59,7 +59,8 @@ yarn typeorm migration:run
 yarn dev
 ```
 
-** Open in Insomnia**
+**Open in Insomnia**
+
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Dental%20Work%20Flow%20Control%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fzaccaron07%2Fdental-work-flow-control-api%2Fmain%2FInsomnia_Dental_API.json)
 
 ## To-do
